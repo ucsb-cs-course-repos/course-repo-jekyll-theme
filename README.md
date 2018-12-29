@@ -1,24 +1,32 @@
-# ucsb-cs-try1
+# ucsb-cs-course-repos/course-repo-jekyll-theme
 
-This is my first attempt at factoring out a remote theme for supporting UCSB CS course repos.
+This is a Jekyll Theme for hosting websites for courses. 
+* Compatible with Github Pages
+* Course content can be authored in Markdown or HTML, or a mix
+* Supports:
+   * Separation of Content from formatting
+   * Separation of Content global to a course from that associated with
+      a particular course offering
+   * Parameterizing content to avoid copy/paste errors (e.g. factoring out
+      content that can vary into variables and macros)
+   * Making content DRY in the sense of "don't repeat yourself"
+* Inspired by, but not derived from:
+   * [minimal-mistakes](https://mmistakes.github.io/minimal-mistakes/)
+   * [academicpages](https://academicpages.github.io/)
+* Features of the following are available:
+   * Bootstrap
+   * JQuery
+   * Font-Awesome
+   * Liquid Syntax 
+   * Rouge for syntax highlighting
 
-This first attempt only tries to factor out things into a better way of supporting the same functionality that already exists.
 
-Here's the plan
 
-| Stage | Goal | Repo |
-|-------|------|------|
-| 1     | Move to remote theme for course instance repos | ucsb-cs-try1 |
-| 2     | Move to remote theme for course heading repos | ucsb-cs-try2 |
-| 3     | Try to marry those together into one remote theme |    |
-| 4     | Try to move to structure with individual quarters under same github org | |
-| 5     | Try to move to remote storage to select which quarter | |
-| 6     | Try to move to navigation with Bootstrap instead of Jquery mobile | |
+Features Removed from Earlier Versions
+--------------------------------------
 
-Features Removed
----------------
-
-The following features were removed because it wasn't clear there was any widespread use of them.
+The following features were removed because it wasn't clear there was
+any widespread use of them.
 
 If they are desired, they can be added back in a future release:
 
