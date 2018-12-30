@@ -5,7 +5,7 @@
 {% endif %}
 
 {% if site.data.navigation.home.url %}
-  {% assign home_url = site.data.navigation.home_url %}
+  {% assign home_url = site.data.navigation.home.url %}
 {% else %}
   {% assign home_url = site.url %}
 {% endif %}
@@ -14,7 +14,7 @@
 {%- if home_url contains '://' -%}
   {%- assign home_url_final = home_url -%}
 {%- else -%}
-  {%- if home_url == "" or home.url == "/" -%}
+  {%- if home_url == "" or home_url == "/" -%}
     {%- assign home_url_final = home_url | relative_url -%}
   {%- else -%}
      {%- capture home_url_final -%}{{production_url}}{{home_url}}{%- endcapture -%}
