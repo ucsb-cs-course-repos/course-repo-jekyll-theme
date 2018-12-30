@@ -9,18 +9,20 @@
     <div class="container">
     {% include nav.html %}
     <div id="content"  class="ui-content">
-      {%- if page.collection == "topics" -%}
+      {% if page.topic  %}
           <h1>{{ page.topic}}</h1>
-          <p class="topic-summary">{{ page.desc }}</p>
-          {% if page.topic_index_top and page.category_prefix %}
+      {% endif  %}
+      {% if page.desc  %}
+        <p class="topic-summary">{{ page.desc }}</p>
+      {% endif  %}
+        
+      {% if page.topic_index_top and page.category_prefix %}
             {% include category_index.html %}
-          {% endif %}    
-
-      {%- endif -%}
+      {% endif %}    
       
       {{ content }}
 
-      {%- if page.collection == "topics" -%}
+      {%- if page.category_prefix -%}
         {% if page.category_prefix %}
           {% include category_index.html %}
         {% endif %}    
