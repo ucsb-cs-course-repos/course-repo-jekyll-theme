@@ -10,10 +10,11 @@
   {% assign home_url = site.url %}
 {% endif %}
 
+
 {%- if home_url contains '://' -%}
   {%- assign home_url_final = home_url -%}
 {%- else -%}
-  {%- if home_url == "" or home.url =="/" -%}
+  {%- if home_url == "" or home.url == "/" -%}
     {%- assign home_url_final = home_url | relative_url -%}
   {%- else -%}
      {%- capture home_url_final -%}{{production_url}}{{home_url}}{%- endcapture -%}
@@ -41,3 +42,9 @@
      {%- capture offering_url_final -%}{{production_url}}{{offering_baseurl}}{{offering_url}}{%- endcapture -%}
   {%- endif -%}
 {%- endif -%}
+
+<script>
+  console.log("site.data.navigation.home.url={{site.data.navigation.home.url}}");
+  console.log("home_url={{home_url}}");
+  console.log("home_url_final={{home_url_final}}");
+</script>
