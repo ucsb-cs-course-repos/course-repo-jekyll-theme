@@ -3,25 +3,15 @@
 ---
 
 
+@import "variables";
+@import "bootstrap/bootstrap";
+@import "syntax-highlighting";
+@import "bootstrap-4-jekyll/bootstrap-4-jekyll";
+@import "bootstrap_customization";
+
+
 @charset "utf-8";
 
-body.syllabus {
-
-  font-size: 10px;
-
-}
-
-table {
-    border-collapse: collapse;
-}
-
-table * th {
-    border: 1px solid black;
-}
-
-table * td {
-    border: 1px solid black;
-}
 
 .asn_table  {
     border: 2px solid black;
