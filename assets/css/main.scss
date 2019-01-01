@@ -2,7 +2,9 @@
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
 
+
 @charset "utf-8";
+@import "course-specific-first";
 
 body.syllabus {
 
@@ -170,4 +172,4 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 1em;
 }
 
-@import "course-specific"; 
+@import "course-specific-last"; 
