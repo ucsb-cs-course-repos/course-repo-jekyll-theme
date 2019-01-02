@@ -18,10 +18,10 @@
       {%- endif -%}
 
       <a class="dropdown-item" href="#"
-        {%- if link.description -%}
-         title="{{ link.description }}"
 	 class="offerings-dropdown-item"
 	 data-url="{{ url }}"
+        {%- if link.description -%}
+         title="{{ link.description }}"
         {%- endif -%}>{{ link.title }}</a>
     {%- endfor -%}
   </div>
