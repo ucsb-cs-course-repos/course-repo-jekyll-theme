@@ -102,7 +102,7 @@ div.hanging-indent-table table * td {
 }
 
 
-@import "jekyll-github";
+
 
 
 
@@ -148,10 +148,91 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 1em;
 }
 
-@import "course-specific-last"; 
 
 div.print-navbar li.dropdown {
     display:none;
+}
+
+div.print-navbar ul li {
+    display: inline;
+    padding-right: 1em;
+}
+
+div.print-navbar ul li {
+    display: inline;
+    padding-right: 1em;
+}
+
+.print-navbar-offering-title {
+    padding-left: 3em;
+    padding-right: 1em;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 2px 1em 2px 1em;
+    padding: 2px 1em 2px 1em;
+    
+}
+
+nav ul li {
+    display: inline;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    background-color: rgb(249,249,249);
+    border-bottom-color: rgb(221, 221, 221);
+    line-height: 20.8px;
+    margin: 2px 1em 2px 1em;
+    padding: 2px 1em 2px 1em;
+
+}
+
+nav ul li a {
+    color: black;
+}
+
+nav ul li a:visited {
+    color: black;
+}
+
+nav ul li a:hover {
+    background-color: rgb(51, 136, 204);
+    color: white;
+}
+
+nav ul.hwk-nav-bar {
+    margin-left: 2em;
+    padding-left: 2em;
+}
+nav ul.hwk-nav-bar li {
+    margin: 2px 4px 2px 0px;
+    padding: 2px 4px 2px 4px;
+}
+
+
+nav button {
+    display: none;
+}
+
+
+@media print {
+    div.print-navbar {
+	display: none;
+    }
+    nav {
+	display: none;
+    }
+}
+
+@media print {
+    div.print-navbar {
+	display: none;
+    }
+    nav {
+	display: none;
+    }
 }
 
 div.print-navbar ul li {
@@ -173,12 +254,3 @@ nav button {
     display: none;
 }
 
-
-@media print {
-    div.print-navbar {
-	display: none;
-    }
-    nav {
-	display: none;
-    }
-}
