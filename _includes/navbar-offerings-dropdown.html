@@ -17,10 +17,11 @@
          {%- endif -%}
       {%- endif -%}
 
-      <a class="dropdown-item" href="{{ url }}"
+      <a class="dropdown-item" href="#"
         {%- if link.description -%}
          title="{{ link.description }}"
 	 class="offerings-dropdown-item"
+	 data-url="{{ url }}"
         {%- endif -%}>{{ link.title }}</a>
     {%- endfor -%}
   </div>
