@@ -1,10 +1,10 @@
-{%- for term in site.data.navigation.offering_menus -%}
-  {%- if term==site.data.navigation.offering_menus[1] %}
+{%- for menu in site.data.navigation.offering_menus -%}
+  {%- if menu.term==site.data.navigation.offering_menus[1].term %}
      {%- assign display_class = "" -%}
   {%- else -%}
      {%- assign display_class = "d-none" -%}
   {%- endif -%}
-  {%- for item in term -%}
+  {%- for item in menu.items -%}
     {%- if item.dropdown -%}
       {%- assign dropdown = item -%}
       {%- include navbar-offering-specific-dropdown.html -%}
@@ -14,7 +14,7 @@
         {%-
 	include navbar-offering-specific-link.html
 	class="nav-link"
-	data-term="{{term}}"
+	data-term="{{menu.term}}"
 	-%}
       </li>	 
     {%- endif -%}
