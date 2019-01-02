@@ -11,8 +11,7 @@
     {%- else -%}
       {%- assign link = item -%}
       <li class="nav-item {{display_class}}"
-        {%- include navbar-offering-specific-link.html class="nav-link" data-term=menu.term -%}
-	-%}
+        {%- include navbar-offering-specific-link.html class="nav-link" data-term=menu.term -%}	
       </li>	 
     {%- endif -%}
   {%- endfor -%}
