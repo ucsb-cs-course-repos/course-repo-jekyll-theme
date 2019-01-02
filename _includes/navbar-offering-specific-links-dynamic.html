@@ -8,7 +8,7 @@
   {%- for item in menu.items -%}
     {%- if item.dropdown -%}
       {%- assign dropdown = item -%}
-      {%- include navbar-offering-specific-dropdown.html -%}
+      {%- include navbar-offering-specific-dropdown.html data-term=menu.term display_class=display_class -%}
     {%- else -%}
       {%- assign link = item -%}
       <li class="nav-item {{display_class}}" data-term="{{menu.term}}">
