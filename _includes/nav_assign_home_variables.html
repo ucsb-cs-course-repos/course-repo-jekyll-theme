@@ -21,27 +21,6 @@
   {%- endif -%}
 {%- endif -%}
 
-{% if site.data.navigation.offerings.url %}
-  {% assign offering_url = site.data.navigation.offerings.url %}
-{% else %}
-  {% assign offering_url = "#" %}
-{% endif %}
-
-{% if site.data.navigation.offerings.baseurl %}
-  {% assign offering_baseurl = site.data.navigation.offerings.baseurl %}
-{% else %}
-  {% assign offering_baseurl = "/" %}
-{% endif %}
-
-{%- if offering_baseurl contains '://' -%}
-  {%- assign offering_url_final = offering_baseurl -%}
-{%- else -%}
-  {%- if offering_baseurl == site.baseurl -%}
-    {%- assign offering_url_final = offering_url | relative_url -%}
-  {%- else -%}
-     {%- capture offering_url_final -%}{{production_url}}{{offering_baseurl}}{{offering_url}}{%- endcapture -%}
-  {%- endif -%}
-{%- endif -%}
 
 <script>
   console.log("site.url={{site.url}}");
@@ -49,9 +28,5 @@
   console.log("site.data.navigation.home.url={{site.data.navigation.home.url}}");
   console.log("site.data.navigation.home.baseurl={{site.data.navigation.home.baseurl}}");
   console.log("home_url={{home_url}}");
-  console.log("offering_url={{offering_url}}");
-  console.log("offering_baseurl={{offering_baseurl}}");
   console.log("home_url_final={{home_url_final}}");
-  console.log("offering_url_final={{offering_url_final}}");
-
 </script>
