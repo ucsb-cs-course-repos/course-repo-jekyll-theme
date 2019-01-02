@@ -1,1 +1,1 @@
-{{ page.due | date: "%-I:%M%P"  }} on {{ page.exam_date | date: "%A, %B %-d" }}
+{{ page.due | date: "%-I:%M%P"  }} on {{ page.due | date: "%A, %B %-d" }}
