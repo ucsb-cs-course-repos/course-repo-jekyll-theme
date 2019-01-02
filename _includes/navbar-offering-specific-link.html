@@ -19,6 +19,7 @@
 
 <a class="{{include.class}}" href="{{ url }}"
       {%- if link.description -%}
-      title="{{ link.description }}"
+   title="{{ link.description }}"
+   data-term="{{include.data-term}}"
       {%- endif -%}>{{logo}}{{ link.title }}</a>
 
