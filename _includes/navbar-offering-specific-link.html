@@ -18,8 +18,6 @@
 {%- endif -%}
 
 <a class="{{include.class}}" href="{{ url }}"
-      {%- if link.description -%}
-   title="{{ link.description }}"
-   data-term="{{include.data-term}}"
-      {%- endif -%}>{{logo}}{{ link.title }}</a>
+   {%- if link.description -%}title="{{ link.description }}" {%- endif -%}
+   data-term="{{include.data-term}}" >{{logo}}{{ link.title }}</a>
 
