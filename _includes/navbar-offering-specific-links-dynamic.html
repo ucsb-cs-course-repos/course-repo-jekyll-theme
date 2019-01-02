@@ -4,6 +4,7 @@
   {%- else -%}
      {%- assign display_class = "d-none" -%}
   {%- endif -%}
+  {%- assign baseurl = menu.baseurl -%}
   {%- for item in menu.items -%}
     {%- if item.dropdown -%}
       {%- assign dropdown = item -%}
