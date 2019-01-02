@@ -8,8 +8,8 @@
 
 {% if site.data.navigation.offerings.baseurl %}
   {% assign offering_baseurl = site.data.navigation.offerings.baseurl %}
-{% elsif site.data.navigation.offering_menus[1].baseurl %}
-  {% assign offering_url = site.data.navigation.offering_menus[1].baseurl %}
+{% elsif site.data.navigation.offering_menus[0].baseurl %}
+  {% assign offering_url = site.data.navigation.offering_menus[0].baseurl %}
 {% else %}
   {% assign offering_baseurl = "/" %}
 {% endif %}
