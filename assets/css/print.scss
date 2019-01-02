@@ -9,6 +9,9 @@
 
 /* DO NOT import Bootstrap */
 
+/* CSS for syntax highlighting */
+@import "jekyll-github";
+
 /* From theme */
 @import "site";
 @import "site-print"; 

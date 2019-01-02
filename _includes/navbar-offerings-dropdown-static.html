@@ -1,7 +1,7 @@
 
 <li class="nav-item dropdown">
   <a class="nav-link dropdown-toggle" href="#" id="offerings-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    {{site.data.navigation.offerings.title | default: "-" }}
+    {{ offering_title | default: "x" }}
   </a>
   <div class="dropdown-menu" aria-labelledby="offerings-dropdown">
     {%- for link in site.data.navigation.offerings.items -%}
