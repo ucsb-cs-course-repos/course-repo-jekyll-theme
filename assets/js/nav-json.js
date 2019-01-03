@@ -1,8 +1,7 @@
 ---
-# front matter so we can use liquid syntax
+layout: json
 ---
-
-var nav = {
+{
     {% if site.data.navigation.offerings %}
     "offerings": {
 	"title" : "{{ site.data.navigation.offerings.title }}",
