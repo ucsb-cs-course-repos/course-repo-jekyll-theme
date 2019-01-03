@@ -1,4 +1,4 @@
-var nav = {
+{
     {% if site.data.navigation.offerings %}
     "offerings": {
 	"title" : "{{ site.data.navigation.offerings.title }}",
