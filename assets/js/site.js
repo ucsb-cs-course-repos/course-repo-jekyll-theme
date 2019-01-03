@@ -83,6 +83,9 @@ function toggle_nav_items(o) {
     });
 }
 
+
+
+
 $( document ).ready(function() {
     var offering = localStorage.getItem("offering");
     if (offering!==null) {
