@@ -27,7 +27,7 @@
 {%- if site.data.navigation.offering_menus -%}
   {%- assign offering_title = site.data.navigation.offering_menus[0].term -%}
 {%- elsif site.data.navigation.offerings.items[0].title -%}
-  {%- assign offering_title = site.data.navigations.offerings.items[0].title -%}
+  {%- assign offering_title = site.data.navigation.offerings.items[0].title -%}
 {%- else -%}
   {%- assign offering_title = "--" -%}
 {%- endif -%}
