@@ -11,7 +11,7 @@
 {%- endif -%}
 
 <li class="nav-item">
-  <a class="nav-link" href="{{url}}">
-    {{site.data.navigation.offerings.title | default: "-" }}
+  <a class="nav-link" href="{{ offering_url_final | default: "#" }}">
+    {{ offering_title | default: "()" }}
   </a>
 </li>
