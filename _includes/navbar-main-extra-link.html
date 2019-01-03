@@ -1,10 +1,10 @@
 {%- if link.url contains '://' -%}
   {%- assign url = link.url -%}
 {%- else -%}
-  {%- if site.baseurl == "" or site.baseurl == "/" -%}
+  {%- if site.baseurl == "/" -%}
     {%- assign url = link.url | relative_url -%}
   {%- else -%}
-    {%- capture url -%}{{production_url}}{{link.url}}{%- endcapture -%}
+    {%- capture url -%}{{production_url}}{{link.baseurl}}{{link.url}}{%- endcapture -%}
   {%- endif -%}
 {%- endif -%}
 
