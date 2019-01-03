@@ -38,7 +38,24 @@ var nav = {
 	    "term": "{{term.term}}",
 	    "baseurl": "{{term.baseurl}}",
 	    "items": [
-		"TODO": "PUT ITEMS HERE",
+		{% for item in term %}
+		{
+		    "title": "{{item.title}}",		    
+		    {% if item.url %} "url": "{{item.url}}", {% endif %}		    
+		    {% if item.description %} "description": "{{item.description}}", {% endif %}
+		    {% if item.dropdown %}
+		    "dropdown" : [
+			{% for ditem in item.dropdown %}
+			{
+			    "title": "{{ditem.title}}",		    
+			    "url": "{{ditem.url}}", 
+			    {% if ditem.description %} "description": "{{ditem.description}}", {% endif %}
+			},
+			{% endfor %}
+		    ]
+		    {% endif %}		    
+		},
+		{% endfor %}
 	    ],
 	},
 	{% endfor %}
