@@ -11,7 +11,7 @@ var nav = {
 		"url" : "{{ item.url }}",
 		"baseurl" : "{{ item.baseurl }}",
 	    },
-	    {% endfor }
+	    {% endfor %}
 	],
     },
     {% endif %}
@@ -27,7 +27,7 @@ var nav = {
 		"url" : "{{ item.url }}",
 		"baseurl" : "{{ item.baseurl }}",
 	    },
-	    {% endfor }
+	    {% endfor %}
 	],
     },
     {% endif %}
@@ -43,6 +43,5 @@ var nav = {
 	},
 	{% endfor %}
     ],
-    {% endif %}
-    
+    {% endif %}    
 }
