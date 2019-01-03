@@ -45,9 +45,9 @@ var nav = {
 	    "term": "{{term.term}}",
 	    "baseurl": "{{term.baseurl}}",
 	    "items": [
-		{% for item in term %}
+		{% for item in term.items %}
 		{
-		    "title": "{{item.title}}",		    
+		    "title": "{{ item.title }}",		    
 		    {% if item.url %} "url": "{{item.url}}", {% endif %}		    
 		    {% if item.description %} "description": "{{item.description}}", {% endif %}
 		    {% if item.dropdown %}
