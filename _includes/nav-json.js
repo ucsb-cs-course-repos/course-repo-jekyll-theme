@@ -21,7 +21,7 @@ var nav = {
 	"url" : "{{ site.data.navigation.offerings.url }}",
 	"baseurl" : "{{ site.data.navigation.offerings.baseurl }}",
 	"items" : [
-	    {% for item in site.data.navigation.offerings.items %}
+	    {% for item in site.data.navigation.offering_links.items %}
 	    {
 		"title" : "{{ item.title }}",
 		"url" : "{{ item.url }}",
