@@ -1,4 +1,4 @@
 ---
 layout: json
 ---
-{% includes nav-json.js %}
+{% include nav-json.js %}
