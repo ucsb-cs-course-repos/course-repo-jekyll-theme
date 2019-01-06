@@ -61,90 +61,39 @@ function traverseDates(dates) {
 	
     }
     for (var i = 0, len = dates.length; i < len; i++) {
-	if (dates[i].type=="hwk") {
-	    processHwkOrLab(dates[i],"hwk");
-	} else if (dates[i].type=="lab") {
-	    processHwkOrLab(dates[i],"lab"); 
-	} else if (dates[i].type=="exam") {
-	    processExam(dates[i]); 
-	} else if (dates[i].type=="cal_date") {
-	    processCalDate(dates[i]);
-	} else {
-	    console.log("UNKNOWN TYPE: " + dates[i].type);
-	}
+	processItem(dates[i]);
     }
 }
 
-function isHwkOrLabAssignment(hwkOrLab) {
-    return hwkOrLab.hasOwnProperty('num') &&
-	hwkOrLab.hasOwnProperty('desc') &&
- 	hwkOrLab.hasOwnProperty('assigned') &&
-	hwkOrLab.hasOwnProperty('due') ;
-}
+function processItem(item) {
 
-
-function isExam(exam) {
-    return exam.hasOwnProperty('num') &&
-	exam.hasOwnProperty('desc') &&
- 	exam.hasOwnProperty('date');
-}
-
-function isCalDate(exam) {
-    return exam.hasOwnProperty('label') &&
-	exam.hasOwnProperty('date');
-}
-
-
-function processHwkOrLab(item,which) {
-    if (which!="hwk" && which!="lab") {
-	reportError("processHwkorLab: second param must be hwk or lab: " + which);
-	return;
+    if (item.assigned) {
+	mmdd_assigned = moment(item.assigned).format("MM/DD");
+	var assigned = {"asn_type" : item.type,
+			"date_type" : "assigned",
+			"value": JSON.stringify(item) };
+	pushToDaysOrErrors(assigned,mmdd_assigned,cal.days,cal.days_outside_calendar);
     }
-    if (!isHwkOrLabAssignment(item)) {
-	reportError("processHwkOrLab: problem with item" + JSON.stringify(item));
-    }
-
-    mmdd_assigned = moment(item.assigned).format("MM/DD");
-    mmdd_due = moment(item.due).format("MM/DD");
-
-    var assigned = {"asn_type" : which, "date_type" : "assigned", "value": JSON.stringify(item) };
-    pushToDaysOrErrors(assigned,mmdd_assigned,cal.days,cal.days_outside_calendar);
-
-    var due = {"asn_type" : which, "date_type" : "due", "value": JSON.stringify(item)};
-    pushToDaysOrErrors(due,mmdd_due,cal.days,cal.days_outside_calendar);
     
-}
-
-function processExam(item) {
-    if (!isExam(item)) {
-	reportError("processExam: problem with item" + JSON.stringify(item));
+    if (item.due) {
+	var due = {"asn_type" : item.type,
+		   "date_type" : "due",
+		   "value": JSON.stringify(item)};
+	mmdd_due = moment(item.due).format("MM/DD");
+	pushToDaysOrErrors(due,mmdd_due,cal.days,cal.days_outside_calendar);
     }
-
-    mmdd_exam_date = moment(item.date).format("MM/DD");
-
-    var assigned = {"asn_type" : "exam", "date_type" : "exam", "value": JSON.stringify(item) };
-    pushToDaysOrErrors(assigned,
-		       mmdd_exam_date,
-		       cal.days,
-		       cal.days_outside_calendar);
-}
-
-function processCalDate(item) {
-    console.log("processCalDate: item=" + JSON.stringify(item));
     
-    if (!isCalDate(item)) {
-	reportError("processCalDate: problem with item" + JSON.stringify(item));
+    if (item.date) {
+	mmdd_date = moment(item.date).format("MM/DD");
+	var assigned = {"asn_type" : item.type,
+			"date_type" : "date",
+			"value": JSON.stringify(item) };
+	pushToDaysOrErrors(assigned,
+			   mmdd_exam_date,
+			   cal.days,
+			   cal.days_outside_calendar);	
     }
-
-    mmdd_date = moment(item.date).format("MM/DD");
-
-    var calDate = {"asn_type" : "calDate", "date_type" : "label", "value": JSON.stringify(item) };
-    pushToDaysOrErrors(calDate,
-		       mmdd_date,
-		       cal.days,
-		       cal.days_outside_calendar);
 }
-
 
 // Used to cal.days[date], but fail over to
 //  the cal.days_outside_calendar as a backup
