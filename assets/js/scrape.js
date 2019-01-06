@@ -10,7 +10,7 @@ var DEBUGGING_ONLY = {
 	{
 	    "label" : "{{name}}",
 	    "items" : [
-		{% for item in site.[name] %}
+		{% for item in site[name] %}
 		{
 		   "collection" : "{{name}}",
 		   "url" : "{{item.url}}",

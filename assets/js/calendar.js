@@ -5,49 +5,50 @@ layout: js
 var cal_dates = {{ site.cal_dates}};
 
 var dates = [
-	{% for asn in site.hwk %}
+    {% for c in site.collections %}
+       {% for item in c %}
 	{
-	    "type" : "hwk",
-	    "num" : "{{ asn.num }}",
-	    "ready" :  "{{ asn.ready }}",
-	    "desc" :  "{{ asn.desc }}",
-	    {% if asn.assigned %}
-	    "assigned" :  "{{ asn.assigned }}",
+	    "type" : "{{c.label}}",
+	    "num" : "{{ item.num }}",
+	    "ready" :  "{{ item.ready }}",
+	    "desc" :  "{{ item.desc }}",
+	    {% if item.assigned %}
+	    "assigned" :  "{{ item.assigned }}",
 	    {% endif %}
-	    {% if asn.due %}	    
-	    "due" :  "{{ asn.due }}",
+	    {% if item.due %}	    
+	    "due" :  "{{ item.due }}",
 	    {% endif %}	    	    
-	    "url" :  "{{ asn.url | relative_url  }}",
+	    "url" :  "{{ item.url | relative_url  }}",
 	},
 	{% endfor %}
 	{% for asn in site.lab %}
-	{% if asn.num %}
+	{% if item.num %}
 	{
 	    "type" : "lab",
-	    "num" : "{{ asn.num }}",
-	    "ready" :  "{{ asn.ready }}",
-	    "desc" :  "{{ asn.desc }}",
-	    {% if asn.assigned %}
-	    "assigned" :  "{{ asn.assigned }}",
+	    "num" : "{{ item.num }}",
+	    "ready" :  "{{ item.ready }}",
+	    "desc" :  "{{ item.desc }}",
+	    {% if item.assigned %}
+	    "assigned" :  "{{ item.assigned }}",
 	    {% endif %}
-	    {% if asn.due %}	    
-	    "due" :  "{{ asn.due }}",
+	    {% if item.due %}	    
+	    "due" :  "{{ item.due }}",
 	    {% endif %}	    	    
-	    "url" :  "{{ asn.url | relative_url  }}",
+	    "url" :  "{{ item.url | relative_url  }}",
 	},
 	{% endif %}
 	{% endfor %}
 	{% for asn in site.exam %}
-	{% if asn.add_to_cal == true %}
+	{% if item.add_to_cal == true %}
 	{
 	    "type" : "exam",
-	    "num" : "{{ asn.num }}",
-	    "ready" :  "{{ asn.ready }}",
-	    "desc" :  "{{ asn.desc }}",
-	    {% if asn.exam_date %}
-	    "date" :  "{{ asn.exam_date }}",
+	    "num" : "{{ item.num }}",
+	    "ready" :  "{{ item.ready }}",
+	    "desc" :  "{{ item.desc }}",
+	    {% if item.exam_date %}
+	    "date" :  "{{ item.exam_date }}",
 	    {% endif %}
-	    "url" :  "{{ asn.url | relative_url  }}",
+	    "url" :  "{{ item.url | relative_url  }}",
 	},
 	{% endif %}
 	{% endfor %}
