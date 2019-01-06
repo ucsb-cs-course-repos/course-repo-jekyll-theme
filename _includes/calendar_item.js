@@ -1,6 +1,6 @@
 {
     "type" : "{{type}}",
-    "url" :  "{{ asn.url | relative_url  }}",	   
+    "url" :  "{{ item.url | relative_url  }}",	   
     {% if item.num %}"num" : "{{ item.num }}",{% endif %}
     {% if item.assigned %}"assigned" : "{{ item.assigned }}",{% endif %}
     {% if item.due %}"due" : "{{ item.due }}",{% endif %}    
