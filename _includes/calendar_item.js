@@ -6,7 +6,9 @@
     {% if item.due %}"due" : "{{ item.due }}",{% endif %}    
     {% if item.ready %}"ready" : "{{ item.ready }}",{% endif %}
     {% if item.desc %}"desc" : "{{ item.desc }}",{% endif %}
-    {% if item.exam_date or item.lecture_date or item.date %}
-    "date" : "{{ item.date }}",
+    {% if item.exam_date %}
+      "date" : "{{ item.exam_date }}",
+    {% elsif item.lecture_date %}
+      "date" : "{{ item.lecture_date }",
     {% endif %}
 }

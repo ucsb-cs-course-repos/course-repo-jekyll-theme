@@ -5,17 +5,17 @@ layout: js
 var cal_dates = {{ site.cal_dates}};
 
 var dates = [
-  {% for c in site.collections %}
-    {% assign type = c.label %}
-    {% for item in site[type] %}
-       {% if item.due or item.assigned or item.exam_date or item.lecture_date or item.date %}
-          {% if item.no_calendar %}
-          {% else %}
+  {%- for c in site.collections -%}
+    {%- assign type = c.label -%}
+    {%- for item in site[type] -%}
+       {%- if item.due or item.assigned or item.exam_date or item.lecture_date or item.date -%}
+          {%- if item.no_calendar -%}
+          {%- else -%}
             {% include calendar_item.js %},
-          {% endif %}
-        {% endif %}
-    {% endfor %}
-  {% endfor %}
+          {%- endif -%}
+        {%- endif -%}
+    {%- endfor -%}
+  {%- endfor -%}
 ];
 
 for (var i=0; i<cal_dates.length; i++) {
