@@ -93,7 +93,7 @@ function traverseDates(dates) {
 	
     }
     for (var i = 0, len = dates.length; i < len; i++) {
-	if (dates[i].type="hwk") {
+	if (dates[i].type=="hwk") {
 	    processHwkOrLab(dates[i],"hwk");
 	} else if (dates[i].type=="lab") {
 	    processHwkOrLab(dates[i],"lab"); 
