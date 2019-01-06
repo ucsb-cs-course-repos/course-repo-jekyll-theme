@@ -8,7 +8,10 @@ var dates = [
   {%- for c in site.collections -%}
     {%- assign type = c.label -%}
     {%- for item in site[type] -%}
-       {%- if item.due or item.assigned or item.exam_date or item.lecture_date or item.date -%}
+    {%- if item.due
+     or item.assigned
+     or item.exam_date
+     or item.lecture_date -%}
           {%- if item.no_calendar -%}
           {%- else -%}
             {% include calendar_item.js %},
@@ -132,7 +135,7 @@ function processCalDate(item) {
     console.log("processCalDate: item=" + JSON.stringify(item));
     
     if (!isCalDate(item)) {
-	reportError("processExam: problem with item" + JSON.stringify(item));
+	reportError("processCalDate: problem with item" + JSON.stringify(item));
     }
 
     mmdd_date = moment(item.date).format("MM/DD");
