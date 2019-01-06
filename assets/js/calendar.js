@@ -48,7 +48,7 @@ var dates = {
 	    "ready" :  "{{ asn.ready }}",
 	    "desc" :  "{{ asn.desc }}",
 	    {% if asn.exam_date %}
-	    "exam_date" :  "{{ asn.exam_date }}",
+	    "date" :  "{{ asn.exam_date }}",
 	    {% endif %}
 	    "url" :  "{{ asn.url | relative_url  }}",
 	},
@@ -126,7 +126,7 @@ function isExam(exam) {
     return exam.hasOwnProperty('num') &&
 	exam.hasOwnProperty('ready') &&
 	exam.hasOwnProperty('desc') &&
- 	exam.hasOwnProperty('exam_date');
+ 	exam.hasOwnProperty('date');
 }
 
 function isCalDate(exam) {
@@ -160,7 +160,7 @@ function processExam(item) {
 	reportError("processExam: problem with item" + JSON.stringify(item));
     }
 
-    mmdd_exam_date = moment(item.exam_date).format("MM/DD");
+    mmdd_exam_date = moment(item.date).format("MM/DD");
 
     var assigned = {"asn_type" : "exam", "date_type" : "exam", "value": JSON.stringify(item) };
     pushToDaysOrErrors(assigned,
