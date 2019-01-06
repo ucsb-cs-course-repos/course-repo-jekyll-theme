@@ -5,11 +5,16 @@ var dates = {
     "hwk": [
 	{% for asn in site.hwk %}
 	{
+	    "type" : "hwk",
 	    "num" : "{{ asn.num }}",
 	    "ready" :  "{{ asn.ready }}",
 	    "desc" :  "{{ asn.desc }}",
+	    {% if asn.assigned %}
 	    "assigned" :  "{{ asn.assigned }}",
+	    {% endif %}
+	    {% if asn.due %}	    
 	    "due" :  "{{ asn.due }}",
+	    {% endif %}	    	    
 	    "url" :  "{{ asn.url | relative_url  }}",
 	},
 	{% endfor %}
@@ -18,11 +23,16 @@ var dates = {
 	{% for asn in site.lab %}
 	{% if asn.num %}
 	{
+	    "type" : "lab",
 	    "num" : "{{ asn.num }}",
 	    "ready" :  "{{ asn.ready }}",
 	    "desc" :  "{{ asn.desc }}",
+	    {% if asn.assigned %}
 	    "assigned" :  "{{ asn.assigned }}",
+	    {% endif %}
+	    {% if asn.due %}	    
 	    "due" :  "{{ asn.due }}",
+	    {% endif %}	    	    
 	    "url" :  "{{ asn.url | relative_url  }}",
 	},
 	{% endif %}
@@ -31,12 +41,15 @@ var dates = {
 
     "exam": [
 	{% for asn in site.exam %}
-	 {% if asn.layout == "exam_info" %}
+	{% if asn.add_to_cal == true %}
 	{
+	    "type" : "exam",
 	    "num" : "{{ asn.num }}",
 	    "ready" :  "{{ asn.ready }}",
 	    "desc" :  "{{ asn.desc }}",
+	    {% if asn.exam_date %}
 	    "exam_date" :  "{{ asn.exam_date }}",
+	    {% endif %}
 	    "url" :  "{{ asn.url | relative_url  }}",
 	},
 	{% endif %}
