@@ -1,5 +1,5 @@
 ---
-# needs front matter so that liquid expressions work properly
+layout: js
 ---
 var dates = {
     "hwk": [
