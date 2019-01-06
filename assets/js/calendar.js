@@ -5,52 +5,17 @@ layout: js
 var cal_dates = {{ site.cal_dates}};
 
 var dates = [
-	{% for asn in site.hwk %}
-	{
-	    "type" : "hwk",
-	    "num" : "{{ asn.num }}",
-	    "ready" :  "{{ asn.ready }}",
-	    "desc" :  "{{ asn.desc }}",
-	    {% if asn.assigned %}
-	    "assigned" :  "{{ asn.assigned }}",
-	    {% endif %}
-	    {% if asn.due %}	    
-	    "due" :  "{{ asn.due }}",
-	    {% endif %}	    	    
-	    "url" :  "{{ asn.url | relative_url  }}",
-	},
-	{% endfor %}
-	{% for asn in site.lab %}
-	{% if asn.num %}
-	{
-	    "type" : "lab",
-	    "num" : "{{ asn.num }}",
-	    "ready" :  "{{ asn.ready }}",
-	    "desc" :  "{{ asn.desc }}",
-	    {% if asn.assigned %}
-	    "assigned" :  "{{ asn.assigned }}",
-	    {% endif %}
-	    {% if asn.due %}	    
-	    "due" :  "{{ asn.due }}",
-	    {% endif %}	    	    
-	    "url" :  "{{ asn.url | relative_url  }}",
-	},
-	{% endif %}
-	{% endfor %}
-	{% for asn in site.exam %}
-	{% if asn.add_to_cal == true %}
-	{
-	    "type" : "exam",
-	    "num" : "{{ asn.num }}",
-	    "ready" :  "{{ asn.ready }}",
-	    "desc" :  "{{ asn.desc }}",
-	    {% if asn.exam_date %}
-	    "date" :  "{{ asn.exam_date }}",
-	    {% endif %}
-	    "url" :  "{{ asn.url | relative_url  }}",
-	},
-	{% endif %}
-	{% endfor %}
+  {% for c in site.collections %}
+    {% assign type = c.label %}
+    {% for item in site[type] %}
+       {% if item.due or item.assigned or item.exam_date or item.lecture_date or item.date %}
+          {% if item.no_calendar %}
+          {% else %}
+            {% include calendar_item.js %},
+          {% endif %}
+        {% endif %}
+    {% endfor %}
+  {% endfor %}
 ];
 
 for (var i=0; i<cal_dates.length; i++) {
