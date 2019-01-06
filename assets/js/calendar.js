@@ -1,3 +1,6 @@
+---
+layout: js
+---
 var dates = {
     "hwk": [
 	{% for asn in site.hwk %}

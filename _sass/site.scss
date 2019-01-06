@@ -5,7 +5,7 @@
     border-collapse: collapse;
 }
 
-.asn_table * td,th {
+.asn_table * td, .asn_table * th {
     border: 1px solid black;
     border-collapse: collapse;
 }
@@ -87,7 +87,7 @@ div.not-ready-warning {
    text-align: left;
 }
 
-div.not-ready-warning h2, h3 {
+div.not-ready-warning h2, div.not-ready-warning h3 {
  text-align:center;
 }
 
@@ -142,7 +142,7 @@ p.staff-bio {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    margin-top: 1em;
+    margin-top: 0.5em;
 }
 
 
