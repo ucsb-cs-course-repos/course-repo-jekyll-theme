@@ -6,17 +6,17 @@ var DEBUGGING_ONLY = {
     "collections" : [
 
 	{% for c in site.collections %}
-	{% assign name = collection.label %}
+	{% assign name = c.label %}
 	{
-	    "label" : "{{name}}",
+	    "label" : "{{ name }}",
 	    "items" : [
 		{% for item in site[name] %}
 		{
-		   "collection" : "{{name}}",
-		   "url" : "{{item.url}}",
-		   "num" : "{{item.num}}",
+		   "collection" : "{{ name }}",
+		   "url" : "{{ item.url }}",
+		   "num" : "{{ item.num }}",
 		},
-	    {% endfor %}
+	        {% endfor %}
 	    ]
 	},
 	{% endfor %}
