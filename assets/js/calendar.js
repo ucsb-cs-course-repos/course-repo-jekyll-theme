@@ -77,7 +77,6 @@ function traverseDates(dates) {
 
 function isHwkOrLabAssignment(hwkOrLab) {
     return hwkOrLab.hasOwnProperty('num') &&
-	hwkOrLab.hasOwnProperty('ready') &&
 	hwkOrLab.hasOwnProperty('desc') &&
  	hwkOrLab.hasOwnProperty('assigned') &&
 	hwkOrLab.hasOwnProperty('due') ;
@@ -86,7 +85,6 @@ function isHwkOrLabAssignment(hwkOrLab) {
 
 function isExam(exam) {
     return exam.hasOwnProperty('num') &&
-	exam.hasOwnProperty('ready') &&
 	exam.hasOwnProperty('desc') &&
  	exam.hasOwnProperty('date');
 }
@@ -235,7 +233,7 @@ function addCalendarTable(cal) {
     
     $('.cal-assignments div[data-asn-type="hwk"]').each(function() {
 	var hwk = ($(this).data("date-value"));
-    if (hwk.ready=="true") {
+    if (hwk.ready && hwk.ready=="true") {
 		$(this).addClass("ready");
 	} else {
 		$(this).addClass("not-ready");
@@ -252,7 +250,7 @@ function addCalendarTable(cal) {
     
     $('.cal-assignments div[data-asn-type="lab"]').each(function() {
 	var asn = $(this).data("date-value");
-    if (asn.ready=="true") {
+	if (asn.ready && asn.ready=="true") {
 		$(this).addClass("ready");
 	} else {
 		$(this).addClass("not-ready");
@@ -268,7 +266,7 @@ function addCalendarTable(cal) {
 
     $('.cal-assignments div[data-asn-type="exam"]').each(function() {
 	var exam = ($(this).data("date-value"));
-    if (exam.ready=="true") {
+    if (exam.ready && exam.ready=="true") {
 		$(this).addClass("ready");
 	} else {
 		$(this).addClass("not-ready");
