@@ -1,8 +1,10 @@
 ---
 layout: js
 ---
-var dates = {
-    "hwk": [
+
+var cal_dates = {{ site.cal_dates}};
+
+var dates = [
 	{% for asn in site.hwk %}
 	{
 	    "type" : "hwk",
@@ -18,8 +20,6 @@ var dates = {
 	    "url" :  "{{ asn.url | relative_url  }}",
 	},
 	{% endfor %}
-    ],
-    "lab": [
 	{% for asn in site.lab %}
 	{% if asn.num %}
 	{
@@ -37,9 +37,6 @@ var dates = {
 	},
 	{% endif %}
 	{% endfor %}
-    ],
-
-    "exam": [
 	{% for asn in site.exam %}
 	{% if asn.add_to_cal == true %}
 	{
@@ -54,11 +51,12 @@ var dates = {
 	},
 	{% endif %}
 	{% endfor %}
-    ],
-    "cal_dates" : {{ site.cal_dates}}
-};
+];
 
-
+for (var i=0; i<cal_dates.length; i++) {
+    cal_dates[i].type = "cal_date";
+}
+dates = dates.concat(cal_dates);
 
 var cal = {
     numWeeks : {{ site.num_weeks }},
@@ -94,24 +92,20 @@ function traverseDates(dates) {
 	}
 	
     }
-    for (var i = 0, len = dates.hwk.length; i < len; i++) {
-	processHwkOrLab(dates.hwk[i],"hwk");
+    for (var i = 0, len = dates.length; i < len; i++) {
+	if (dates[i].type="hwk") {
+	    processHwkOrLab(dates[i],"hwk");
+	} else if (dates[i].type=="lab") {
+	    processHwkOrLab(dates[i],"lab"); 
+	} else if (dates[i].type=="exam") {
+	    processExam(dates[i]); 
+	} else if (dates[i].type=="cal_date") {
+	    processCalDate(dates[i]);
+	} else {
+	    console.log("UNKNOWN TYPE: " + dates[i].type);
+	}
     }
-    for (var i = 0, len = dates.lab.length; i < len; i++) {
-	processHwkOrLab(dates.lab[i],"lab");
-    }
-    for (var i = 0, len = dates.exam.length; i < len; i++) {
-	processExam(dates.exam[i]);
-    }
-    console.log("processCalDate loop:");
-    for (var i = 0, len = dates.cal_dates.length; i < len; i++) {
-	console.log("processCalDate loop, i=" + i);
-	processCalDate(dates.cal_dates[i]);
-    }
-
 }
-
-
 
 function isHwkOrLabAssignment(hwkOrLab) {
     return hwkOrLab.hasOwnProperty('num') &&
