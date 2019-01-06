@@ -1,3 +1,7 @@
+---
+layout: js
+---
+
 var DEBUGGING_ONLY = {
     "collections" : [
 
