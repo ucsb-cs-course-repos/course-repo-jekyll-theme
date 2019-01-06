@@ -89,7 +89,7 @@ function processItem(item) {
 			"date_type" : "date",
 			"value": JSON.stringify(item) };
 	pushToDaysOrErrors(assigned,
-			   mmdd_exam_date,
+			   mmdd_date,
 			   cal.days,
 			   cal.days_outside_calendar);	
     }
