@@ -9,6 +9,6 @@
     {% if item.exam_date %}
       "date" : "{{ item.exam_date }}",
     {% elsif item.lecture_date %}
-      "date" : "{{ item.lecture_date }",
+      "date" : "{{ item.lecture_date }}",
     {% endif %}
 }
