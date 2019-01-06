@@ -296,3 +296,7 @@ $(document).ready(function() {
     setUpCalendar();
 });
 
+// Next, we include calendar_custom.js
+// to allow customization of the calendar
+
+{% include calendar_custom.js %}
