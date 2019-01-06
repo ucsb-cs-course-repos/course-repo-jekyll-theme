@@ -189,10 +189,23 @@ function addCalendarTable(cal) {
 	}
 	var link = $('<a />')
 	    .attr('href',hwk.url)
-	    .attr('data-ajax','false')
 	    .text(hwk.num)
 	    .appendTo($(this));
 	$(this).addClass("hwk");
+    });
+
+    $('.cal-assignments div[data-asn-type="pa"]').each(function() {
+	var asn = $(this).data("date-value");
+	if (asn.ready && asn.ready=="true") {
+	    $(this).addClass("ready");
+	} else {
+	    $(this).addClass("not-ready");
+	}
+	var link = $('<a />')
+	    .attr('href',asn.url)
+	    .text(asn.num)
+	    .appendTo($(this));
+	$(this).addClass("pa");
     });
 
     
@@ -206,7 +219,6 @@ function addCalendarTable(cal) {
 	}
 	var link = $('<a />')
 	    .attr('href',asn.url)
-		// .attr('data-ajax','false')
 	    .text(asn.num)
 	    .appendTo($(this));
 	$(this).addClass("lab");
@@ -225,14 +237,29 @@ function addCalendarTable(cal) {
 	    .appendTo($(this));
 	var link = $('<a />')
 	    .attr('href',exam.url)
-	    .attr('data-ajax','false')
 	    .text(exam.num)
 	    .appendTo($(this));
 	$(this).addClass("exam")
 ;
     });
 
-    $('.cal-assignments div[data-asn-type="calDate"]').each(function() {
+
+    $('.cal-assignments div[data-asn-type="lectures"]').each(function() {
+	var asn = $(this).data("date-value");
+	if (asn.ready && asn.ready=="true") {
+	    $(this).addClass("ready");
+	} else {
+	    $(this).addClass("not-ready");
+	}
+	var link = $('<a />')
+	    .attr('href',asn.url)
+	    .text(asn.num)
+	    .prependTo($(this));
+	$(this).addClass("lecture");
+    });
+
+    
+    $('.cal-assignments div[data-asn-type="cal_date"]').each(function() {
 	var cal_date = ($(this).data("date-value"));
 	$(this).addClass("ready");
 
