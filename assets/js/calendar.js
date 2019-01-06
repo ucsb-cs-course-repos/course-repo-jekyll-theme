@@ -1,3 +1,6 @@
+---
+# needs front matter so that liquid expressions work properly
+---
 var dates = {
     "hwk": [
 	{% for asn in site.hwk %}
