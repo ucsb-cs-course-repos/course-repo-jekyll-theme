@@ -16,11 +16,11 @@
 <table>
 <tr>
 {% if prev_link %}
-  <td><a href="{{prev_link}}">Previous Lecture</a></td>
+  <td><a href="{{prev_link | relative_url}}">Previous Lecture</a></td>
   {% endif %}
 <td>{{page.num}}</td>
 {% if next_link %}
- <td><a href="{{next_link}}">Next Lecture</a></td>
+ <td><a href="{{next_link | relative_url}}">Next Lecture</a></td>
 {% endif %}
 </tr>
 </table>
