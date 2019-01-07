@@ -1,51 +1,30 @@
 ---
 layout: js
 ---
-var dates = {
-    "hwk": [
-	{% for asn in site.hwk %}
-	{
-	    "num" : "{{ asn.num }}",
-	    "ready" :  "{{ asn.ready }}",
-	    "desc" :  "{{ asn.desc }}",
-	    "assigned" :  "{{ asn.assigned }}",
-	    "due" :  "{{ asn.due }}",
-	    "url" :  "{{ asn.url | relative_url  }}",
-	},
-	{% endfor %}
-    ],
-    "lab": [
-	{% for asn in site.lab %}
-	{% if asn.num %}
-	{
-	    "num" : "{{ asn.num }}",
-	    "ready" :  "{{ asn.ready }}",
-	    "desc" :  "{{ asn.desc }}",
-	    "assigned" :  "{{ asn.assigned }}",
-	    "due" :  "{{ asn.due }}",
-	    "url" :  "{{ asn.url | relative_url  }}",
-	},
-	{% endif %}
-	{% endfor %}
-    ],
 
-    "exam": [
-	{% for asn in site.exam %}
-	 {% if asn.layout == "exam_info" %}
-	{
-	    "num" : "{{ asn.num }}",
-	    "ready" :  "{{ asn.ready }}",
-	    "desc" :  "{{ asn.desc }}",
-	    "exam_date" :  "{{ asn.exam_date }}",
-	    "url" :  "{{ asn.url | relative_url  }}",
-	},
-	{% endif %}
-	{% endfor %}
-    ],
-    "cal_dates" : {{ site.cal_dates}}
-};
+var cal_dates = {{ site.cal_dates}};
 
+var dates = [
+  {%- for c in site.collections -%}
+    {%- assign type = c.label -%}
+    {%- for item in site[type] -%}
+    {%- if item.due
+     or item.assigned
+     or item.exam_date
+     or item.lecture_date -%}
+          {%- if item.no_calendar -%}
+          {%- else -%}
+            {% include calendar_item.js %},
+          {%- endif -%}
+        {%- endif -%}
+    {%- endfor -%}
+  {%- endfor -%}
+];
 
+for (var i=0; i<cal_dates.length; i++) {
+    cal_dates[i].type = "cal_date";
+}
+dates = dates.concat(cal_dates);
 
 var cal = {
     numWeeks : {{ site.num_weeks }},
@@ -81,97 +60,40 @@ function traverseDates(dates) {
 	}
 	
     }
-    for (var i = 0, len = dates.hwk.length; i < len; i++) {
-	processHwkOrLab(dates.hwk[i],"hwk");
+    for (var i = 0, len = dates.length; i < len; i++) {
+	processItem(dates[i]);
     }
-    for (var i = 0, len = dates.lab.length; i < len; i++) {
-	processHwkOrLab(dates.lab[i],"lab");
-    }
-    for (var i = 0, len = dates.exam.length; i < len; i++) {
-	processExam(dates.exam[i]);
-    }
-    console.log("processCalDate loop:");
-    for (var i = 0, len = dates.cal_dates.length; i < len; i++) {
-	console.log("processCalDate loop, i=" + i);
-	processCalDate(dates.cal_dates[i]);
-    }
-
 }
 
+function processItem(item) {
 
-
-function isHwkOrLabAssignment(hwkOrLab) {
-    return hwkOrLab.hasOwnProperty('num') &&
-	hwkOrLab.hasOwnProperty('ready') &&
-	hwkOrLab.hasOwnProperty('desc') &&
- 	hwkOrLab.hasOwnProperty('assigned') &&
-	hwkOrLab.hasOwnProperty('due') ;
-}
-
-
-function isExam(exam) {
-    return exam.hasOwnProperty('num') &&
-	exam.hasOwnProperty('ready') &&
-	exam.hasOwnProperty('desc') &&
- 	exam.hasOwnProperty('exam_date');
-}
-
-function isCalDate(exam) {
-    return exam.hasOwnProperty('label') &&
-	exam.hasOwnProperty('date');
-}
-
-
-function processHwkOrLab(item,which) {
-    if (which!="hwk" && which!="lab") {
-	reportError("processHwkorLab: second param must be hwk or lab: " + which);
-	return;
+    if (item.assigned) {
+	mmdd_assigned = moment(item.assigned).format("MM/DD");
+	var assigned = {"asn_type" : item.type,
+			"date_type" : "assigned",
+			"value": JSON.stringify(item) };
+	pushToDaysOrErrors(assigned,mmdd_assigned,cal.days,cal.days_outside_calendar);
     }
-    if (!isHwkOrLabAssignment(item)) {
-	reportError("processHwkOrLab: problem with item" + JSON.stringify(item));
-    }
-
-    mmdd_assigned = moment(item.assigned).format("MM/DD");
-    mmdd_due = moment(item.due).format("MM/DD");
-
-    var assigned = {"asn_type" : which, "date_type" : "assigned", "value": JSON.stringify(item) };
-    pushToDaysOrErrors(assigned,mmdd_assigned,cal.days,cal.days_outside_calendar);
-
-    var due = {"asn_type" : which, "date_type" : "due", "value": JSON.stringify(item)};
-    pushToDaysOrErrors(due,mmdd_due,cal.days,cal.days_outside_calendar);
     
-}
-
-function processExam(item) {
-    if (!isExam(item)) {
-	reportError("processExam: problem with item" + JSON.stringify(item));
+    if (item.due) {
+	var due = {"asn_type" : item.type,
+		   "date_type" : "due",
+		   "value": JSON.stringify(item)};
+	mmdd_due = moment(item.due).format("MM/DD");
+	pushToDaysOrErrors(due,mmdd_due,cal.days,cal.days_outside_calendar);
     }
-
-    mmdd_exam_date = moment(item.exam_date).format("MM/DD");
-
-    var assigned = {"asn_type" : "exam", "date_type" : "exam", "value": JSON.stringify(item) };
-    pushToDaysOrErrors(assigned,
-		       mmdd_exam_date,
-		       cal.days,
-		       cal.days_outside_calendar);
-}
-
-function processCalDate(item) {
-    console.log("processCalDate: item=" + JSON.stringify(item));
     
-    if (!isCalDate(item)) {
-	reportError("processExam: problem with item" + JSON.stringify(item));
+    if (item.date) {
+	mmdd_date = moment(item.date).format("MM/DD");
+	var assigned = {"asn_type" : item.type,
+			"date_type" : "date",
+			"value": JSON.stringify(item) };
+	pushToDaysOrErrors(assigned,
+			   mmdd_date,
+			   cal.days,
+			   cal.days_outside_calendar);	
     }
-
-    mmdd_date = moment(item.date).format("MM/DD");
-
-    var calDate = {"asn_type" : "calDate", "date_type" : "label", "value": JSON.stringify(item) };
-    pushToDaysOrErrors(calDate,
-		       mmdd_date,
-		       cal.days,
-		       cal.days_outside_calendar);
 }
-
 
 // Used to cal.days[date], but fail over to
 //  the cal.days_outside_calendar as a backup
@@ -260,31 +182,43 @@ function addCalendarTable(cal) {
     
     $('.cal-assignments div[data-asn-type="hwk"]').each(function() {
 	var hwk = ($(this).data("date-value"));
-    if (hwk.ready=="true") {
+    if (hwk.ready && hwk.ready=="true") {
 		$(this).addClass("ready");
 	} else {
 		$(this).addClass("not-ready");
 	}
 	var link = $('<a />')
 	    .attr('href',hwk.url)
-	    .attr('data-ajax','false')
 	    .text(hwk.num)
 	    .appendTo($(this));
 	$(this).addClass("hwk");
+    });
+
+    $('.cal-assignments div[data-asn-type="pa"]').each(function() {
+	var asn = $(this).data("date-value");
+	if (asn.ready && asn.ready=="true") {
+	    $(this).addClass("ready");
+	} else {
+	    $(this).addClass("not-ready");
+	}
+	var link = $('<a />')
+	    .attr('href',asn.url)
+	    .text(asn.num)
+	    .appendTo($(this));
+	$(this).addClass("pa");
     });
 
     
     
     $('.cal-assignments div[data-asn-type="lab"]').each(function() {
 	var asn = $(this).data("date-value");
-    if (asn.ready=="true") {
+	if (asn.ready && asn.ready=="true") {
 		$(this).addClass("ready");
 	} else {
 		$(this).addClass("not-ready");
 	}
 	var link = $('<a />')
 	    .attr('href',asn.url)
-		// .attr('data-ajax','false')
 	    .text(asn.num)
 	    .appendTo($(this));
 	$(this).addClass("lab");
@@ -293,7 +227,7 @@ function addCalendarTable(cal) {
 
     $('.cal-assignments div[data-asn-type="exam"]').each(function() {
 	var exam = ($(this).data("date-value"));
-    if (exam.ready=="true") {
+    if (exam.ready && exam.ready=="true") {
 		$(this).addClass("ready");
 	} else {
 		$(this).addClass("not-ready");
@@ -303,14 +237,29 @@ function addCalendarTable(cal) {
 	    .appendTo($(this));
 	var link = $('<a />')
 	    .attr('href',exam.url)
-	    .attr('data-ajax','false')
 	    .text(exam.num)
 	    .appendTo($(this));
 	$(this).addClass("exam")
 ;
     });
 
-    $('.cal-assignments div[data-asn-type="calDate"]').each(function() {
+
+    $('.cal-assignments div[data-asn-type="lectures"]').each(function() {
+	var asn = $(this).data("date-value");
+	if (asn.ready && asn.ready=="true") {
+	    $(this).addClass("ready");
+	} else {
+	    $(this).addClass("not-ready");
+	}
+	var link = $('<a />')
+	    .attr('href',asn.url)
+	    .text(asn.num)
+	    .prependTo($(this));
+	$(this).addClass("lecture");
+    });
+
+    
+    $('.cal-assignments div[data-asn-type="cal_date"]').each(function() {
 	var cal_date = ($(this).data("date-value"));
 	$(this).addClass("ready");
 
@@ -374,3 +323,7 @@ $(document).ready(function() {
     setUpCalendar();
 });
 
+// Next, we include calendar_custom.js
+// to allow customization of the calendar
+
+{% include calendar_custom.js %}

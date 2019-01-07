@@ -6,8 +6,18 @@ var DEBUGGING_ONLY = {
     "collections" : [
 
 	{% for c in site.collections %}
+	{% assign name = c.label %}
 	{
-	    "label" : "{{c.label}}"
+	    "label" : "{{ name }}",
+	    "items" : [
+		{% for item in site[name] %}
+		{
+		   "collection" : "{{ name }}",
+		   "url" : "{{ item.url }}",
+		   "num" : "{{ item.num }}",
+		},
+	        {% endfor %}
+	    ]
 	},
 	{% endfor %}
     ],
