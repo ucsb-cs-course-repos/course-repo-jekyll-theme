@@ -8,7 +8,11 @@
 {% for lect in site.lectures %}
 <tr>
   <td><a href="{{lect.url | relative_url }}">{{ lect.num }}</a></td>
+  {% if lect.lecture_date %}
   <td>{{ lect.date | date: "%a %m/%d" }}</td>
+  {% else %}
+  <td>{{ lect.date | date: "%a %m/%d" }}</td>
+  {% endif %}
   <td>{{ lect.desc }}{% if lect.slides %}&nbsp;(<a href="{{lect.slides|relative_url}}">slides</a>){% endif%}</td>
 </tr>
 {% endfor %}
