@@ -9,7 +9,7 @@
     {% include nav.html %}
     <div id="content"  class="ui-content">
       {% include lecture_next_prev_links.html %}
-      <h1>{{page.num}}, {{ page.date | date: "%a %m/%d" }}</h1>
+      <h1>{{page.num}}, {{ page.lecture_date | date: "%a %m/%d" }}</h1>
       <p class="topic-summary">{{ page.desc }}</p>
       {{ content }}
     </div><!-- content -->
