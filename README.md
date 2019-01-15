@@ -1,5 +1,7 @@
 # ucsb-cs-course-repos/course-repo-jekyll-theme
 
+* Version: 1.1.0 (see: [semver](https://semver.org/)
+
 This is a Jekyll Theme for hosting websites for courses. 
 * Compatible with Github Pages
 * Course content can be authored in Markdown or HTML, or a mix
