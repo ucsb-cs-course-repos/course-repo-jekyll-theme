@@ -9,7 +9,7 @@
 <tr>
   <td><a href="{{lect.url | relative_url }}">{{ lect.num }}</a></td>
   {% if lect.lecture_date %}
-  <td>{{ lect.date | date: "%a %m/%d" }}</td>
+  <td>{{ lect.lecture_date | date: "%a %m/%d" }}</td>
   {% else %}
   <td>{{ lect.date | date: "%a %m/%d" }}</td>
   {% endif %}
