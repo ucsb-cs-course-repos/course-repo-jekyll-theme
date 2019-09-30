@@ -17,4 +17,9 @@
 @import "site-print"; 
 
 /* Blank in theme, to be overridden at course level */
-@import "course-specific-last"; 
+@import "course-specific-last";
+
+
+.d-none { display:none; }
+
+div.print-navbar ul li.d-none { display:none; }
