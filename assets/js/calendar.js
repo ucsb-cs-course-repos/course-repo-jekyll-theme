@@ -273,10 +273,15 @@ function addCalendarTable(cal) {
     
     $('.cal-assignments div[data-date-type="due"]').each(function() {
 	var asn = ($(this).data("date-value"));
+	if (asnType.endsWith("WIP"))
+	    return;	
 	$(this).append(" due " + moment(asn.due).format("hh:mma") );
     });
 
     $('.cal-assignments div[data-date-type="assigned"]').each(function() {
+	var asnType =  ($(this).data("asn-type"));
+	if (asnType.endsWith("WIP"))
+	    return;
 	$(this).append(" assigned");
     });
 
