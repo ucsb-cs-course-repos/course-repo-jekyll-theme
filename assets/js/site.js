@@ -109,29 +109,30 @@ $( document ).ready(function() {
 
 // toggle footer-navbar visibility when g then h (for GitHub) is pressed
 
-Mousetrap.bind('g h', function() {
-    console.log("toggle footer-navbar visibility");
-    $(".footer-navbar").each ( function() {
-	if ($(this).hasClass("d-none")) {
+if (typeof Mousetrap !== 'undefined') {
+  Mousetrap.bind('g h', function() {
+      console.log("toggle footer-navbar visibility");
+      $(".footer-navbar").each ( function() {
+        if ($(this).hasClass("d-none")) {
 	    $(this).removeClass("d-none");
 	} else {
 	    $(this).addClass("d-none");
 	}
-    });
+      });
 
-});
+  });
 
-// toggle footer-navbar visibility when g then h (for GitHub) is pressed
 
-Mousetrap.bind('t c', function() {
-    console.log("toggle travis-ci image visibility");
-    $(".travis-ci-status").each ( function() {
-	if ($(this).hasClass("d-none")) {
-	    $(this).removeClass("d-none");
-	} else {
-	    $(this).addClass("d-none");
-	}
-    });
+  // toggle footer-navbar visibility when g then h (for GitHub) is pressed
 
-});
-	       
+  Mousetrap.bind('t c', function() {
+      console.log("toggle travis-ci image visibility");
+      $(".travis-ci-status").each ( function() {
+  	  if ($(this).hasClass("d-none")) {
+	      $(this).removeClass("d-none");
+	  } else {
+	      $(this).addClass("d-none");
+	  }
+      });
+  });
+}
