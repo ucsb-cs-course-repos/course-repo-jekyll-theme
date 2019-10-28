@@ -273,7 +273,7 @@ td.h03-table table * td,th {
 @media print
 {
     @page {
-	size: auto;
+	size: letter portrait;
 	margin: 3%;
     }
 
