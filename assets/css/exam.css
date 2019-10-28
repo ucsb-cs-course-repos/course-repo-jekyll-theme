@@ -371,8 +371,7 @@ td.scissors-area img {
 
 .exam-header-umail-label {
     font-size: 14px !important;
-    padding-right:190px;   /* THIS CONTROLS THE WIDTH OF ODD PAGE HEADERS */
-    border-right:none; 
+    padding-right:100px;   /* THIS CONTROLS THE WIDTH OF ODD PAGE HEADERS */
     vertical-align:top; 
     height:3.5em; 
     text-align:left;    
