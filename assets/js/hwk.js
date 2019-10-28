@@ -16,9 +16,5 @@ $(document).ready(function(){
 	$(this).html(i+1); // re-calculate page numbers
     });
 
-    $('.d-none').each(function(e) {
-	console.log("removing element with class .d-none");
-	e.remove();
-    });
     
 });
