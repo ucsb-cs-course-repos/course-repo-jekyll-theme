@@ -6,7 +6,8 @@ layout: null
 
 
 $(document).ready(function(){
-
+    console.log("exam.js: document is ready");
+    
     
     $('.page-break-before').each(function(i) {
 	var pageNum = i+1;
@@ -42,5 +43,6 @@ $(document).ready(function(){
 	    $(this).parents(".pagebreak").addClass("odd-page");
 	}
     });
-
+    console.log("exam.js: done");
+    
 });
