@@ -97,8 +97,8 @@ function processItem(item) {
 	var due2 = {"asn_type" : item.type,
 		   "date_type" : "due2",
 		   "value": JSON.stringify(item)};
-	mmdd_due = moment(item.due).format("MM/DD");
-	pushToDaysOrErrors(due2,mmdd_due,cal.days,cal.days_outside_calendar);
+	var mmdd_due2 = moment(item.due2).format("MM/DD");
+	pushToDaysOrErrors(due2,mmdd_due2,cal.days,cal.days_outside_calendar);
     }
 
     
