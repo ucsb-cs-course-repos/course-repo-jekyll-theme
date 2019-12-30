@@ -12,7 +12,7 @@ var due2_text = " due2 ";
 {%- if site.assigned_text -%}assigned_text = "{{site.assigned_text}}"; {%- endif -%}
 {%- if site.assigned2_text -%}assigned2_text = "{{site.assigned2_text}}"; {%- endif -%}
 {%- if site.due_text -%}due_text = "{{site.due_text}}"; {%- endif -%}
-{%- if site.due2_text -%}due2_text = "{{site.due2_text}}"; {%- endif -%}
+{% if site.due2_text %}due2_text = "{{site.due2_text}}"; {% endif %}
 
 var dates = [
   {%- for c in site.collections -%}
