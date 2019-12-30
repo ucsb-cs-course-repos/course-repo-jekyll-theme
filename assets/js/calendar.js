@@ -4,6 +4,11 @@ layout: js
 
 var cal_dates = {{ site.cal_dates}};
 
+var assigned_text = " assigned";
+var assigned2_text = " assigned2";
+var due_text = " due ";
+var due2_text = " due2 ";
+
 var dates = [
   {%- for c in site.collections -%}
     {%- assign type = c.label -%}
@@ -296,7 +301,7 @@ function addCalendarTable(cal) {
 	console.log("asnType="+asnType);
 	if (asnType.endsWith("WIP"))
 	    return;	
-	$(this).append(" due " + moment(asn.due).format("hh:mma") );
+	$(this).append(due_text + moment(asn.due).format("hh:mma") );
     });
 
     $('.cal-assignments div[data-date-type="due2"]').each(function() {
@@ -305,7 +310,7 @@ function addCalendarTable(cal) {
 	console.log("asnType="+asnType);
 	if (asnType.endsWith("WIP"))
 	    return;	
-	$(this).append(" due2 " + moment(asn.due).format("hh:mma") );
+	$(this).append(due2_text + moment(asn.due).format("hh:mma") );
     });
 
     
@@ -314,7 +319,7 @@ function addCalendarTable(cal) {
 	console.log("asnType="+asnType);
 	if (asnType.endsWith("WIP"))
 	    return;
-	$(this).append(" assigned");
+	$(this).append(assigned_text);
     });
 
     $('.cal-assignments div[data-date-type="assigned2"]').each(function() {
@@ -322,7 +327,7 @@ function addCalendarTable(cal) {
 	console.log("asnType="+asnType);
 	if (asnType.endsWith("WIP"))
 	    return;
-	$(this).append(" assigned2");
+	$(this).append(assigned2_text);
     });
 
     
