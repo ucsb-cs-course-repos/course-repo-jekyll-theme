@@ -88,11 +88,11 @@ function processItem(item) {
     }
 
     if (item.assigned2) {
-	mmdd_assigned = moment(item.assigned).format("MM/DD");
+	var mmdd_assigned2 = moment(item.assigned2).format("MM/DD");
 	var assigned2 = {"asn_type" : item.type,
 			"date_type" : "assigned2",
 			"value": JSON.stringify(item) };
-	pushToDaysOrErrors(assigned2,mmdd_assigned,cal.days,cal.days_outside_calendar);
+	pushToDaysOrErrors(assigned2,mmdd_assigned2,cal.days,cal.days_outside_calendar);
     }
 
     if (item.due) {
