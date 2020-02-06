@@ -1,9 +1,9 @@
 # ucsb-cs-course-repos/course-repo-jekyll-theme
 
-* Version: 1.1.0 (see: [semver](https://semver.org/) for explanation and [VERSION.md](VERSION.md) for version history)
+* Version: 1.2.0 (see: [semver](https://semver.org/) for explanation and [VERSION.md](VERSION.md) for version history)
 
 
-This is a Jekyll Theme for hosting websites for courses. 
+This is a Jekyll Theme for hosting websites for courses.
 * Compatible with Github Pages
 * Course content can be authored in Markdown or HTML, or a mix
 * Supports:
@@ -20,7 +20,7 @@ This is a Jekyll Theme for hosting websites for courses.
    * Bootstrap
    * JQuery
    * Font-Awesome
-   * Liquid Syntax 
+   * Liquid Syntax
    * Rouge for syntax highlighting
 
 
@@ -38,5 +38,5 @@ If they are desired, they can be added back in a future release:
 TODO
 ----
 
-* In `lecture_next_prev_links.html`, there is a loop that's probably O(n^2).  Try replacing with JS code that will run in time O(n).   
+* In `lecture_next_prev_links.html`, there is a loop that's probably O(n^2).  Try replacing with JS code that will run in time O(n).
 * Can `head.html` and `head_hwk.html` be refactored into a single file with some variables to switch on or off the extra css and js for homework assignments?

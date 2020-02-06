@@ -3,7 +3,7 @@
 
 {% for lect in site.lectures %}
   {% if lect.num == page.num %}
-     {% assign get_prev_link = false %}	
+     {% assign get_prev_link = false %}
      {% assign get_next_link = true %}
   {% elsif get_next_link == true %}
      {% assign get_next_link = false %}
@@ -13,7 +13,7 @@
   {% endif %}
 {% endfor %}
 
-<table>
+<table ... style='border: 1px solid black'>
 <tr>
 {% if prev_link %}
   <td><a href="{{prev_link | relative_url}}">Previous Lecture</a></td>
@@ -24,4 +24,3 @@
 {% endif %}
 </tr>
 </table>
-
