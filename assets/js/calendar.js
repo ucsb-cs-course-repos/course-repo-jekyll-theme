@@ -4,12 +4,24 @@ layout: js
 
 var cal_dates = {{ site.cal_dates}};
 
+var assigned_text = " assigned";
+var assigned2_text = " assigned2";
+var due_text = " due ";
+var due2_text = " due2 ";
+
+{%- if site.assigned_text -%}assigned_text = "{{site.assigned_text}}"; {%- endif -%}
+{%- if site.assigned2_text -%}assigned2_text = "{{site.assigned2_text}}"; {%- endif -%}
+{%- if site.due_text -%}due_text = "{{site.due_text}}"; {%- endif -%}
+{% if site.due2_text %}due2_text = "{{site.due2_text}}"; {% endif %}
+
 var dates = [
   {%- for c in site.collections -%}
     {%- assign type = c.label -%}
     {%- for item in site[type] -%}
     {%- if item.due
+     or item.due2
      or item.assigned
+     or item.assigned2
      or item.exam_date
      or item.lecture_date -%}
           {%- if item.no_calendar -%}
@@ -74,7 +86,15 @@ function processItem(item) {
 			"value": JSON.stringify(item) };
 	pushToDaysOrErrors(assigned,mmdd_assigned,cal.days,cal.days_outside_calendar);
     }
-    
+
+    if (item.assigned2) {
+	var mmdd_assigned2 = moment(item.assigned2).format("MM/DD");
+	var assigned2 = {"asn_type" : item.type,
+			"date_type" : "assigned2",
+			"value": JSON.stringify(item) };
+	pushToDaysOrErrors(assigned2,mmdd_assigned2,cal.days,cal.days_outside_calendar);
+    }
+
     if (item.due) {
 	var due = {"asn_type" : item.type,
 		   "date_type" : "due",
@@ -82,6 +102,15 @@ function processItem(item) {
 	mmdd_due = moment(item.due).format("MM/DD");
 	pushToDaysOrErrors(due,mmdd_due,cal.days,cal.days_outside_calendar);
     }
+
+    if (item.due2) {
+	var due2 = {"asn_type" : item.type,
+		   "date_type" : "due2",
+		   "value": JSON.stringify(item)};
+	var mmdd_due2 = moment(item.due2).format("MM/DD");
+	pushToDaysOrErrors(due2,mmdd_due2,cal.days,cal.days_outside_calendar);
+    }
+
     
     if (item.date) {
 	mmdd_date = moment(item.date).format("MM/DD");
@@ -277,17 +306,36 @@ function addCalendarTable(cal) {
 	console.log("asnType="+asnType);
 	if (asnType.endsWith("WIP"))
 	    return;	
-	$(this).append(" due " + moment(asn.due).format("hh:mma") );
+	$(this).append(due_text + moment(asn.due).format("hh:mma") );
     });
 
+    $('.cal-assignments div[data-date-type="due2"]').each(function() {
+	var asn = ($(this).data("date-value"));
+	var asnType =  ($(this).data("asn-type"));
+	console.log("asnType="+asnType);
+	if (asnType.endsWith("WIP"))
+	    return;	
+	$(this).append(due2_text + moment(asn.due).format("hh:mma") );
+    });
+
+    
     $('.cal-assignments div[data-date-type="assigned"]').each(function() {
 	var asnType =  ($(this).data("asn-type"));
 	console.log("asnType="+asnType);
 	if (asnType.endsWith("WIP"))
 	    return;
-	$(this).append(" assigned");
+	$(this).append(assigned_text);
     });
 
+    $('.cal-assignments div[data-date-type="assigned2"]').each(function() {
+	var asnType =  ($(this).data("asn-type"));
+	console.log("asnType="+asnType);
+	if (asnType.endsWith("WIP"))
+	    return;
+	$(this).append(assigned2_text);
+    });
+
+    
 }
 
 function getAssignments(cal,mmdd) {
