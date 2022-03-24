@@ -1,0 +1,7 @@
+{%- if site.data.navigation.current -%} 
+<!-- This is the current quarter -->
+{%- else -%}
+<nav class="navbar navbar-expand-lg navbar-light bg-warning">
+  <span class="navbar-text">Warning: This page is not for the current quarter!</span>
+</nav>
+{%- endif -%}
